@@ -20,7 +20,7 @@ import java.util.concurrent.ScheduledExecutorService;
  * @since 12.10.15
  */
 @Configuration
-public class ApplicationConfig {
+public class ApplicationConfig{
     private static final Integer TASKS_POOL_SIZE = 10;
 
     @Value("${PORT:8080}")
@@ -61,4 +61,6 @@ public class ApplicationConfig {
         dataSource.setPassword(password);
         return dataSource;
     }
+
+
 }

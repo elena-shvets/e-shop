@@ -68,7 +68,7 @@ public class ProductController {
 //            return new ResponseEntity(HttpStatus.NO_CONTENT);
 //        }
 //        return new ResponseEntity(products, HttpStatus.OK);
-        return "test";
+        return "site.greeting";
     }
 
     /**

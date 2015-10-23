@@ -7,6 +7,6 @@
 
 <div class="side_block" style="width:1040px; margin: 50px auto 0px">
 
- 
+    <div></div>
 
 </div>

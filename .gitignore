@@ -15,3 +15,5 @@
 hs_err_pid*
 *.war.original
 target/addresscrud-1.0-SNAPSHOT/*
+*.jar.original
+pom.properties
