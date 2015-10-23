@@ -41,12 +41,12 @@
 <body>
 <div class="bg_main_page"><img src="/img/fon_bg_start.jpg" alt=""></div>
 <div class="main main_page">
-    <tiles:insertAttribute name="header_content"/>
+    <tiles:insertAttribute name="header"/>
 
-    <tiles:insertAttribute name="main_content"/>
+    <tiles:insertAttribute name="body"/>
 
 </div>
-<tiles:insertAttribute name="footer_content"/>
+<tiles:insertAttribute name="footer"/>
 
 </body>
 
