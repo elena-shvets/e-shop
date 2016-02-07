@@ -1,6 +1,7 @@
 package com.ecommerce.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -19,11 +20,17 @@ public class Product {
     private String title;
     private BigDecimal price;
     private String description;
-    private Long categoryId;
+    private ProductCategory category;
+//    private String imageUrl;
+    private Media media;
+
+    public Product() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @NotNull
+    @Column(name = "id", unique = true, nullable = false, updatable = false)
     public Long getId() {
         return id;
     }
@@ -32,7 +39,7 @@ public class Product {
         this.id = id;
     }
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     public String getTitle() {
         return title;
     }
@@ -59,12 +66,30 @@ public class Product {
         this.description = description;
     }
 
-    @Column(name = "category_id")
-    public Long getCategoryId() {
-        return categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    public ProductCategory getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
+//    @Column(name = "image_url")
+//    public String getImageUrl() {
+//        return imageUrl;
+//    }
+//
+//    public void setImageUrl(String imageUrl) {
+//        this.imageUrl = imageUrl;
+//    }
+
+    public Media getMedia() {
+        return media;
+    }
+
+    public void setMedia(Media media) {
+        this.media = media;
     }
 }

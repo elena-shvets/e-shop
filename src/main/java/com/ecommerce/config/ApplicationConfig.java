@@ -1,24 +1,27 @@
 package com.ecommerce.config;
 
+import org.apache.catalina.Context;
+import org.apache.jasper.servlet.JasperInitializer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory;
+import org.springframework.boot.context.embedded.tomcat.TomcatContextCustomizer;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
+import java.util.Collections;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
- * Class {@link com.ecommerce.config.ApplicationConfig}
- *
- * @author Elena Shvets
- * @version 1.0
- * @since 12.10.15
- */
+* Class {@link com.ecommerce.config.ApplicationConfig}
+*
+* @author Elena Shvets
+* @version 1.0
+* @since 12.10.15
+*/
 @Configuration
 public class ApplicationConfig{
     private static final Integer TASKS_POOL_SIZE = 10;
@@ -40,18 +43,34 @@ public class ApplicationConfig{
         return new PropertySourcesPlaceholderConfigurer();
     }
 
+
     @Bean(destroyMethod = "shutdown")
     public ScheduledExecutorService taskExecutor() {
         return Executors.newScheduledThreadPool(TASKS_POOL_SIZE);
     }
 
-    @Bean
-    public EmbeddedServletContainerFactory servletContainer() {
-        JettyEmbeddedServletContainerFactory servletContainer =
-                new JettyEmbeddedServletContainerFactory("/*", port);
-        return servletContainer;
-    }
 
+//    @Bean
+//    public EmbeddedServletContainerFactory servletContainer() {
+//        TomcatEmbeddedServletContainerFactory servletContainer = new TomcatEmbeddedServletContainerFactory("/*", port);
+////        JettyEmbeddedServletContainerFactory servletContainer =
+////                new JettyEmbeddedServletContainerFactory("/*", port);
+//        return servletContainer;
+//    }
+
+    @Bean
+    public TomcatEmbeddedServletContainerFactory factory() {
+
+        TomcatEmbeddedServletContainerFactory tomcatEmbeddedServletContainerFactory = new TomcatEmbeddedServletContainerFactory();
+        tomcatEmbeddedServletContainerFactory.addContextCustomizers(new TomcatContextCustomizer() {
+
+            @Override
+            public void customize(Context context) {
+                context.addServletContainerInitializer(new JasperInitializer(), Collections.<Class<?>> emptySet());
+            }
+        });
+        return tomcatEmbeddedServletContainerFactory;
+    }
     @Bean
     public DataSource makeDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -62,5 +81,11 @@ public class ApplicationConfig{
         return dataSource;
     }
 
+
+//    @Bean
+//    public Filter hiddenHttpMethodFilter() {
+//        HiddenHttpMethodFilter filter = new HiddenHttpMethodFilter();
+//        return filter;
+//    }
 
 }

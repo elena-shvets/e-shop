@@ -45,8 +45,8 @@ public class EcommerceController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<User> createUser(@RequestBody UserDto userDto){
-        if(userDto == null){
+    public ResponseEntity<User> createUser(@RequestBody UserDto userDto) {
+        if (userDto == null) {
             return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
         }
         User user = new User();
@@ -95,8 +95,8 @@ public class EcommerceController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDto productDto){
-        if(productDto == null){
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDto productDto) {
+        if (productDto == null) {
             return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
         }
         Product product = new Product();

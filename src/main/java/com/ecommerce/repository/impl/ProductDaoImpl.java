@@ -1,7 +1,7 @@
 package com.ecommerce.repository.impl;
 
 import com.ecommerce.model.Product;
-import com.ecommerce.repository.ProductRepository;
+import com.ecommerce.repository.ProductDao;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 /**
- * Class {@link com.ecommerce.repository.impl.ProductRepositoryImpl}
+ * Class {@link com.ecommerce.repository.impl.ProductDaoImpl}
  *
  * @author Elena Shvets
  * @version 1.0
@@ -19,23 +19,23 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class ProductRepositoryImpl implements ProductRepository {
+public class ProductDaoImpl implements ProductDao {
 
-    private static final Logger LOG = Logger.getLogger(ProductRepositoryImpl.class);
+    private static final Logger LOG = Logger.getLogger(ProductDaoImpl.class);
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public Product save(Product product) {
+    public void save(Product product) {
         entityManager.persist(product);
-        return product;
+
     }
 
     @Override
-    public Product update(Product product) {
+    public void update(Product product) {
         entityManager.merge(product);
-        return product;
+
     }
 
     @Override
@@ -54,20 +54,24 @@ public class ProductRepositoryImpl implements ProductRepository {
         return entityManager.find(Product.class, title);
     }
 
-    @Override
-    public List<Product> findByCategory(Long categoryId) {
-        List<Product> products = (List<Product>) entityManager.find(Product.class, categoryId);
-        return products;
-    }
+//    @Override
+//    public List<Product> findByCategory(Long categoryId) {
+//        List<Product> products = (List<Product>) entityManager.find(Product.class, categoryId);
+//        return products;
+//    }
 
     @Override
-    public void delete(Product product) {
-        Product removingProduct = entityManager.find(Product.class, product.getId());
+    public void deleteById(Long id) {
+        Product removingProduct = entityManager.find(Product.class, id);
         entityManager.remove(removingProduct);
     }
 
+    //    @Override
+//    public boolean isProductExist(Long id) {
+//        return entityManager.find(Product.class, id) != null;
+//    }
     @Override
     public boolean isProductExist(Long id) {
-        return entityManager.find(Product.class, id) != null;
+        return entityManager.contains(findOneById(id));
     }
 }

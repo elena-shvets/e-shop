@@ -5,13 +5,13 @@ import com.ecommerce.model.ProductCategory;
 import java.util.List;
 
 /**
- * Class {@link com.ecommerce.repository.ProductCategoryRepository}
+ * Class {@link ProductCategoryDao}
  *
  * @author Elena Shvets
  * @version 1.0
  * @since 14.10.15
  */
-public interface ProductCategoryRepository {
+public interface ProductCategoryDao {
 
     ProductCategory save(ProductCategory productCategory);
     ProductCategory update(ProductCategory productCategory);

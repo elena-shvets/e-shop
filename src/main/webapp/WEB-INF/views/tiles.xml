@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-        <!DOCTYPE tiles-definitions PUBLIC
-                "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
-                "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-<!-- Templates -->
+    <!-- Templates -->
 
-<definition name="layout.basic" template="/WEB-INF/views/basic.jsp">
-    <put-attribute name="title" value="Spring Web MVC with Tiles 3" />
-    <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
-    <put-attribute name="body" value="" />
-    <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
-</definition>
-
-<!-- Pages -->
-
-<definition name="site.homepage" extends="layout.basic">
-    <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
-</definition>
-
-<definition name="site.greeting" extends="layout.basic">
-    <put-attribute name="body" value="/WEB-INF/views/greeting.jsp" />
-</definition>
-
-    <definition name="view" extends="layout.basic">
-            <put-attribute name="body" value="/WEB-INF/views/view_products.jsp"/>
+    <definition name="layout.basic" template="/WEB-INF/views/layouts/basic.jsp">
+        <put-attribute name="title" value="Spring Web MVC with Tiles 3"/>
+        <put-attribute name="header" value="/WEB-INF/views/layouts/header.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/views/layouts/footer.jsp"/>
     </definition>
+
+    <!-- Pages -->
+
+    <definition name="site.homepage" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/layouts/main.jsp"/>
+    </definition>
+
+    <definition name="site.greeting" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/greeting.jsp"/>
+    </definition>
+
+    <definition name="view.all_products" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/all_products.jsp"/>
+    </definition>
+
+    <definition name="view.one_product" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/one_product.jsp"/>
+    </definition>
+    <definition name="view.login_form" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/login.jsp"/>
+    </definition>
+    <definition name="view.admin_form" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/admin.jsp"/>
+    </definition>
+    <definition name="view.created_prod" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/created_prod.jsp"/>
+    </definition>
+
 </tiles-definitions>

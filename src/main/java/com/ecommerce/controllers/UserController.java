@@ -21,7 +21,7 @@ import java.util.List;
  * @since 15.10.15
  */
 @Controller
-@RequestMapping("/userController")
+@RequestMapping("/user")
 public class UserController {
     private static final Logger LOG = Logger.getLogger(UserController.class);
 
@@ -39,8 +39,8 @@ public class UserController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<User> createUser(@RequestBody UserDto userDto){
-        if(userDto == null){
+    public ResponseEntity<User> createUser(@RequestBody UserDto userDto) {
+        if (userDto == null) {
             return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
         }
         User user = new User();
@@ -48,6 +48,11 @@ public class UserController {
         user.setPassword(userDto.getPassword());
         userService.saveUser(user);
         return new ResponseEntity<User>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String showLoginForm() {
+        return "view.login_form";
     }
 
     /**

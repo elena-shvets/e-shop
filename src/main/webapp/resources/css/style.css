@@ -1,0 +1,32 @@
+.main{
+    height: 800px;
+    width: 1200px;
+    background-color: lightsteelblue;
+
+}
+.navbar{
+    height: 200px;
+    width: 100%;
+    background-color: #CDC5BF;
+    position: absolute;
+}
+
+#all_products{
+    color: #FF7F00;
+}
+
+.button{
+    height:30px;
+    position:absolute;
+    top:0px;
+    width:50px;
+    margin-left:10px;
+    font-family: Arial;
+    color: white;
+    font-size: 14px;
+    border-right:2px solid grey;
+    text-align:center;
+    vertical-align:middle;
+    text-decoration: none;
+}
+

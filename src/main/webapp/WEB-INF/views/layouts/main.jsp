@@ -10,22 +10,21 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/css/slider.css" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet">
+    <link href="/webapp/css/style.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/css/jquery.jscrollpane.css">
     <link type="text/css" rel="stylesheet" href="/css/smoothness/jquery-ui-1.10.4.custom.min.css">
     <link rel="stylesheet" type="text/css" href="/css/easydropdown.css">
-    <script type="text/javascript" src="/js/jquery.js"> </script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/jquery.mousewheel.js"></script>
     <script type="text/javascript" src="/js/jquery.jscrollpane.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.formatDateTime.min.js"> </script>
+    <script type="text/javascript" src="/js/jquery.formatDateTime.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui-1.10.4.custom.min.js"></script>
     <script type="text/javascript" src="/js/jquery.easydropdown.min.js"></script>
-    <script type="text/javascript" src="/js/dust-full.min.js"></script>
-    <script type="text/javascript" src="/js/dust-helpers-1.1.2.js"></script>
-    <script src="http://connect.facebook.net/en_US/sdk.js"></script>
+    <%--<script type="text/javascript" src="/js/dust-full.min.js"></script>--%>
+    <%--<script type="text/javascript" src="/js/dust-helpers-1.1.2.js"></script>--%>
+
     <script type="text/javascript" src="/js/global.js"></script>
-    <script type="text/javascript" src="/js/fb.module.js"></script>
-    <script type="text/javascript" src="/js/auth.module.js"></script>
+
 
     <script type="text/javascript" src="/js/mobilyslider.js"></script>
 
@@ -40,7 +39,7 @@
 
 <body>
 <div class="bg_main_page"><img src="/img/fon_bg_start.jpg" alt=""></div>
-<div class="main main_page">
+<div class="main">
     <tiles:insertAttribute name="header"/>
 
     <tiles:insertAttribute name="body"/>

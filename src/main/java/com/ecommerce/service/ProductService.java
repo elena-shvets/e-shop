@@ -13,12 +13,12 @@ import java.util.List;
  */
 public interface ProductService {
 
-    Product save(Product product);
-    Product update(Product product);
+    void save(Product product);
+    void update(Product product);
     List<Product> getAll();
     Product findOneById(Long id);
     Product findOneByTitle(String title);
-    List<Product> findByCategory(Long categoryId);
-    void delete(Product product);
+//    List<Product> findByCategory(Long categoryId);
+    void deleteById(Long id);
     boolean isProductExist(Long id);
 }

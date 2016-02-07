@@ -2,9 +2,59 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Greeting page</title>
+    <style>
+        .navbar{
+            height: 100px;
+            width: 100%;
+            background-color: #CDC5BF;
+            position: absolute;
+        }
+
+        h2{
+            padding-top: 250px;
+            color: dimgray;
+            font-size: 40px;
+            text-align: center;
+        }
+        #text{
+            background-color: orange;
+            width: 100%;
+            height: 700px;
+        }
+
+        .button{
+            height:30px;
+            position:relative;
+            top:0px;
+            width:50px;
+            margin-left:10px;
+            font-family: Arial;
+            color: white;
+            font-size: 14px;
+            color: whitesmoke;
+            border-right:2px solid grey;
+            text-align:center;
+            vertical-align:middle;
+            text-decoration: none;
+        }
+        .button:hover{
+            background-color: orange;
+        }
+
+    </style>
 </head>
 <body>
-<p><h1>This is e-shop</h1></p>
+<nav class="navbar">
+    <span class="button"><a href="index.html">Home</a></span>
+    <span class="button"><a href="/products/getAll">All products</a></span>
+    <span class="button"><a href="">Admin</a></span>
+    <span class="button"><a href="">Payments</a></span>
+    <span class="button"><a href="">Sign up</a></span>
+
+</nav>
+<div id="text">
+<h2>This is e-shop</h2>
+</div>
 </body>
 </html>

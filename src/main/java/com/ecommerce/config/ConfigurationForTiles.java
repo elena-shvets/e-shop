@@ -25,13 +25,16 @@ public class ConfigurationForTiles {
          *
          * @return tiles configurer
          */
-        @Bean
-        public TilesConfigurer tilesConfigurer() {
-            final TilesConfigurer configurer = new TilesConfigurer();
-            configurer.setDefinitions(new String[] {"classpath:WEB-INF/views/tiles.xml"});
-            configurer.setCheckRefresh(true);
-            return configurer;
-        }
+
+    @Bean
+    public TilesConfigurer tilesConfigurer() {
+        TilesConfigurer configurer = new TilesConfigurer();
+        configurer.setUseMutableTilesContainer(true);
+//        configurer.setPreparerFactoryClass(SpringBeanPreparerFactory.class);
+        configurer.setDefinitions(new String[] {"/WEB-INF/views/tiles.xml"});
+        configurer.setCheckRefresh(true);
+        return configurer;
+    }
 
         /**
          * Introduce a Tiles view resolver, this is a convenience implementation that extends URLBasedViewResolver.

@@ -13,7 +13,7 @@ public enum MediaType {
     IMAGE("image");
 
     MediaType(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     private String name;
@@ -22,9 +22,9 @@ public enum MediaType {
         return name;
     }
 
-    public static MediaType getMediaType(String type){
-        if(type.startsWith("video/"))return MediaType.VIDEO;
-        if(type.startsWith("image/"))return MediaType.IMAGE;
+    public static MediaType getMediaType(String type) {
+        if (type.startsWith("video/")) return MediaType.VIDEO;
+        if (type.startsWith("image/")) return MediaType.IMAGE;
         return null;
     }
 }

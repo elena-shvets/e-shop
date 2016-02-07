@@ -1,7 +1,7 @@
 package com.ecommerce.service.impl;
 
 import com.ecommerce.model.Product;
-import com.ecommerce.repository.ProductRepository;
+import com.ecommerce.repository.ProductDao;
 import com.ecommerce.service.ProductService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,53 +22,70 @@ public class ProductServiceImpl implements ProductService {
     private static final Logger LOG = Logger.getLogger(ProductServiceImpl.class);
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductDao productDao;
 
     @Autowired
     private EntityManager entityManager;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Product save(Product product) {
+    public void save(Product product) {
         if (product == null) {
             throw new IllegalArgumentException("Product must not be null");
         }
-        return productRepository.save(product);
+       productDao.save(product);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Product update(Product product) {
-        return productRepository.update(product);
+    public void update(Product product) {
+        productDao.update(product);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Product> getAll() {
-        return productRepository.getAll();
+        return productDao.getAll();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Product findOneById(Long id) {
-        return productRepository.findOneById(id);
+        return productDao.findOneById(id);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Product findOneByTitle(String title) {
-        return productRepository.findOneByTitle(title);
+        return productDao.findOneByTitle(title);
     }
-
+    /**
+     * {@inheritDoc}
+     */
+//    @Override
+//    public List<Product> findByCategory(Long categoryId) {
+//        return productRepository.findByCategory(categoryId);
+//    }
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<Product> findByCategory(Long categoryId) {
-        return productRepository.findByCategory(categoryId);
+    public void deleteById(Long id) {
+        productDao.deleteById(id);
     }
-
-    @Override
-    public void delete(Product product) {
-        productRepository.delete(product);
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isProductExist(Long id) {
         if (!entityManager.contains(findOneById(id))) {
-            return productRepository.isProductExist(id);
+            return productDao.isProductExist(id);
         }
         return true;
     }

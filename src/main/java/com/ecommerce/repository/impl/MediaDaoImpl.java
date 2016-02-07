@@ -1,7 +1,7 @@
 package com.ecommerce.repository.impl;
 
 import com.ecommerce.model.Media;
-import com.ecommerce.repository.MediaRepository;
+import com.ecommerce.repository.MediaDao;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 /**
- * Class {@link com.ecommerce.repository.impl.UserRepositoryImpl}
+ * Class {@link com.ecommerce.repository.impl.UserDaoImpl}
  *
  * @author Elena Shvets
  * @version 1.0
@@ -18,9 +18,9 @@ import javax.transaction.Transactional;
  */
 @Repository
 @Transactional
-public class MediaRepositoryImpl implements MediaRepository {
+public class MediaDaoImpl implements MediaDao {
 
-    private static final Logger LOG = Logger.getLogger(MediaRepositoryImpl.class);
+    private static final Logger LOG = Logger.getLogger(MediaDaoImpl.class);
 
     @PersistenceContext
     private EntityManager entityManager;

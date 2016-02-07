@@ -1,7 +1,7 @@
 package com.ecommerce.repository.impl;
 
 import com.ecommerce.model.User;
-import com.ecommerce.repository.UserRepository;
+import com.ecommerce.repository.UserDao;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 /**
- * Class {@link com.ecommerce.repository.impl.UserRepositoryImpl}
+ * Class {@link com.ecommerce.repository.impl.UserDaoImpl}
  *
  * @author Elena Shvets
  * @version 1.0
@@ -20,9 +20,9 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class UserRepositoryImpl implements UserRepository {
+public class UserDaoImpl implements UserDao {
 
-    private static final Logger LOG = Logger.getLogger(UserRepositoryImpl.class);
+    private static final Logger LOG = Logger.getLogger(UserDaoImpl.class);
 
     @PersistenceContext
     private EntityManager entityManager;

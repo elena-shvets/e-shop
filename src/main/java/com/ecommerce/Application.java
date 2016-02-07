@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
+//@ComponentScan({"com.ecommrce"})
 public class Application {
 
 
@@ -12,6 +13,9 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/products").setViewName("created_prod");
+//    }
 
 
 }

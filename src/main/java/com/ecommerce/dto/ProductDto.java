@@ -20,6 +20,8 @@ public class ProductDto implements Serializable{
     private String title;
     private BigDecimal price;
     private String description;
+//    private Category category;
+
 
 
     public String getTitle() {
@@ -45,4 +47,12 @@ public class ProductDto implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+
+//    public Category getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
 }

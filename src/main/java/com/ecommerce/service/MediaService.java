@@ -3,7 +3,7 @@ package com.ecommerce.service;
 import com.ecommerce.model.Media;
 
 /**
- * Class {@link com.ecommerce.repository.impl.UserRepositoryImpl}
+ * Class {@link com.ecommerce.repository.impl.UserDaoImpl}
  *
  * @author Elena Shvets
  * @version 1.0

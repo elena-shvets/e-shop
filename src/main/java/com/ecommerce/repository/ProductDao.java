@@ -5,21 +5,21 @@ import com.ecommerce.model.Product;
 import java.util.List;
 
 /**
- * Class {@link com.ecommerce.repository.ProductRepository}
+ * Class {@link ProductDao}
  *
  * @author Elena Shvets
  * @version 1.0
  * @since 15.10.15
  */
 
-public interface ProductRepository {
+public interface ProductDao {
 
-    Product save(Product product);
-    Product update(Product product);
+    void save(Product product);
+    void update(Product product);
     List<Product> getAll();
     Product findOneById(Long id);
     Product findOneByTitle(String title);
-    List<Product> findByCategory(Long categoryId);
-    void delete(Product product);
+//    List<Product> findByCategory(Long categoryId);
+    void deleteById(Long id);
     boolean isProductExist(Long id);
 }

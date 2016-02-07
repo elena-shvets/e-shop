@@ -1,7 +1,7 @@
 package com.ecommerce.service.impl;
 
 import com.ecommerce.model.User;
-import com.ecommerce.repository.UserRepository;
+import com.ecommerce.repository.UserDao;
 import com.ecommerce.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     private static final Logger LOG = Logger.getLogger(UserServiceImpl.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private UserDao userDao;
 
     @Autowired
     private EntityManager entityManager;
@@ -33,39 +33,39 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new IllegalArgumentException("User must not be null");
         }
-        return userRepository.saveUser(user);
+        return userDao.saveUser(user);
     }
 
     @Override
     public User updateUser(User user) {
-        return userRepository.updateUser(user);
+        return userDao.updateUser(user);
     }
 
     @Override
     public void deleteUser(User user) {
-        userRepository.deleteUser(user);
+        userDao.deleteUser(user);
 
     }
 
     @Override
     public User findUserByEmail(String email) {
-        return userRepository.findUserByEmail(email);
+        return userDao.findUserByEmail(email);
     }
 
     @Override
     public User findUserById(Long id) {
-        return userRepository.findUserById(id);
+        return userDao.findUserById(id);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.getAllUsers();
+        return userDao.getAllUsers();
 }
 
     @Override
     public boolean checkUserForExistById(Long id) {
         if (!entityManager.contains(findUserById(id))) {
-            return userRepository.checkUserForExistById(id);
+            return userDao.checkUserForExistById(id);
         }
         return true;
     }

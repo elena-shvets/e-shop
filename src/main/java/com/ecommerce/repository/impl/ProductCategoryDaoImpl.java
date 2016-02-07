@@ -1,7 +1,7 @@
 package com.ecommerce.repository.impl;
 
 import com.ecommerce.model.ProductCategory;
-import com.ecommerce.repository.ProductCategoryRepository;
+import com.ecommerce.repository.ProductCategoryDao;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 
 /**
- * Class {@link com.ecommerce.repository.impl.ProductCategoryRepositoryImpl}
+ * Class {@link com.ecommerce.repository.impl.ProductCategoryDaoImpl}
  *
  * @author Elena Shvets
  * @version 1.0
@@ -21,9 +21,9 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class ProductCategoryRepositoryImpl implements ProductCategoryRepository {
+public class ProductCategoryDaoImpl implements ProductCategoryDao {
 
-    private static final Logger LOG = Logger.getLogger(ProductRepositoryImpl.class);
+    private static final Logger LOG = Logger.getLogger(ProductDaoImpl.class);
 
     @PersistenceContext
     private EntityManager entityManager;

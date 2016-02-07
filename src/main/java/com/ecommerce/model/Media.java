@@ -1,6 +1,7 @@
 package com.ecommerce.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -14,7 +15,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "media")
 @NamedQuery(name = "Media.findAll", query = "SELECT m FROM Media as m")
-public class Media implements Serializable{
+public class Media implements Serializable {
 
     private Long id;
     private Long productId;
@@ -33,7 +34,8 @@ public class Media implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @NotNull
+    @Column(name = "id", unique = true, nullable = false, updatable = false)
     public Long getId() {
         return id;
     }
