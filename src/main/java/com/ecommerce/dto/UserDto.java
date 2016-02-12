@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @JsonAutoDetect
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class UserDto implements Serializable{
+public class UserDto implements Serializable {
 
     private String email;
     private String password;

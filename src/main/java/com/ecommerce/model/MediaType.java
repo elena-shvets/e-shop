@@ -1,7 +1,7 @@
 package com.ecommerce.model;
 
 /**
- * Class {@link com.ecommerce.model.MediaType}
+ * Class {@link MediaType}
  *
  * @author Elena Shvets
  * @version 1.0

@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * Class {@link com.ecommerce.dto.UserDto}
+ * Class {@link com.ecommerce.dto.ProductDto}
  *
  * @author Elena Shvets
  * @version 1.0
@@ -15,13 +15,11 @@ import java.math.BigDecimal;
  */
 @JsonAutoDetect
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class ProductDto implements Serializable{
+public class ProductDto implements Serializable {
 
     private String title;
     private BigDecimal price;
     private String description;
-//    private Category category;
-
 
 
     public String getTitle() {
@@ -48,11 +46,5 @@ public class ProductDto implements Serializable{
         this.description = description;
     }
 
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
+
 }

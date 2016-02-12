@@ -16,14 +16,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
-* Class {@link com.ecommerce.config.ApplicationConfig}
-*
-* @author Elena Shvets
-* @version 1.0
-* @since 12.10.15
-*/
+ * Class {@link ApplicationConfig} for data base configuration
+ *
+ * @author Elena Shvets
+ * @version 1.0
+ * @since 12.10.15
+ */
 @Configuration
-public class ApplicationConfig{
+public class ApplicationConfig {
     private static final Integer TASKS_POOL_SIZE = 10;
 
     @Value("${PORT:8080}")
@@ -38,6 +38,10 @@ public class ApplicationConfig{
     @Value("${MYSQL_PASSWORD}")
     private String password;
 
+    /**
+     * Introduce a Property sources placeholder configurer
+     * @return  instance
+     */
     @Bean
     public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
@@ -49,15 +53,10 @@ public class ApplicationConfig{
         return Executors.newScheduledThreadPool(TASKS_POOL_SIZE);
     }
 
-
-//    @Bean
-//    public EmbeddedServletContainerFactory servletContainer() {
-//        TomcatEmbeddedServletContainerFactory servletContainer = new TomcatEmbeddedServletContainerFactory("/*", port);
-////        JettyEmbeddedServletContainerFactory servletContainer =
-////                new JettyEmbeddedServletContainerFactory("/*", port);
-//        return servletContainer;
-//    }
-
+    /**
+     * Introduce a Tomcat embedded servlet container factory
+     * @return factory
+     */
     @Bean
     public TomcatEmbeddedServletContainerFactory factory() {
 
@@ -66,11 +65,16 @@ public class ApplicationConfig{
 
             @Override
             public void customize(Context context) {
-                context.addServletContainerInitializer(new JasperInitializer(), Collections.<Class<?>> emptySet());
+                context.addServletContainerInitializer(new JasperInitializer(), Collections.<Class<?>>emptySet());
             }
         });
         return tomcatEmbeddedServletContainerFactory;
     }
+
+    /**
+     * Introduces data source and variables for the database connection
+     * @return data source
+     */
     @Bean
     public DataSource makeDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -81,11 +85,5 @@ public class ApplicationConfig{
         return dataSource;
     }
 
-
-//    @Bean
-//    public Filter hiddenHttpMethodFilter() {
-//        HiddenHttpMethodFilter filter = new HiddenHttpMethodFilter();
-//        return filter;
-//    }
 
 }

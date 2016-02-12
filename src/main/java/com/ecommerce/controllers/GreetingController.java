@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Class {@link com.ecommerce.controllers.GreetingController}
+ * Class {@link GreetingController}
  *
  * @author Elena Shvets
  * @version 1.0

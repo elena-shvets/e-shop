@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+
 /**
- * Class {@link com.ecommerce.service.impl.UserServiceImpl}
+ * Class {@link ProductServiceImpl}
  *
  * @author Elena Shvets
  * @version 1.0
- * @since 14.10.15
+ * @since 07.02.16
  */
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
@@ -35,15 +36,18 @@ public class ProductServiceImpl implements ProductService {
         if (product == null) {
             throw new IllegalArgumentException("Product must not be null");
         }
-       productDao.save(product);
+        productDao.save(product);
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
+//    @Transactional
     public void update(Product product) {
         productDao.update(product);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -51,6 +55,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAll() {
         return productDao.getAll();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -58,6 +63,7 @@ public class ProductServiceImpl implements ProductService {
     public Product findOneById(Long id) {
         return productDao.findOneById(id);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -65,13 +71,15 @@ public class ProductServiceImpl implements ProductService {
     public Product findOneByTitle(String title) {
         return productDao.findOneByTitle(title);
     }
+
     /**
      * {@inheritDoc}
      */
-//    @Override
-//    public List<Product> findByCategory(Long categoryId) {
-//        return productRepository.findByCategory(categoryId);
-//    }
+    @Override
+    public List<Product> findByCategory(Long categoryId) {
+        return productDao.findByCategory(categoryId);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -79,6 +87,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteById(Long id) {
         productDao.deleteById(id);
     }
+
     /**
      * {@inheritDoc}
      */

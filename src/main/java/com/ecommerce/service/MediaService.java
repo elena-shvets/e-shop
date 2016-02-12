@@ -3,16 +3,34 @@ package com.ecommerce.service;
 import com.ecommerce.model.Media;
 
 /**
- * Class {@link com.ecommerce.repository.impl.UserDaoImpl}
+ * Service layer for {@link Media}
  *
  * @author Elena Shvets
  * @version 1.0
- * @since 16.10.15
+ * @since 07.02.16
  */
 
 public interface MediaService {
 
-    Media save(Media media);
-    Media update(Media media);
+    /**
+     * Constructs entity
+     * Persists new entity
+     *
+     * @param media
+     */
+    void save(Media media);
+
+    /**
+     * Updates given entity in database (if exists)
+     *
+     * @param media
+     */
+    void update(Media media);
+
+    /**
+     * Removes given entity from database
+     *
+     * @param media
+     */
     void delete(Media media);
 }

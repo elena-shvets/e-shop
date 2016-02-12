@@ -2,7 +2,6 @@ package com.ecommerce.repository.impl;
 
 import com.ecommerce.model.Media;
 import com.ecommerce.repository.MediaDao;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,33 +9,39 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 /**
- * Class {@link com.ecommerce.repository.impl.UserDaoImpl}
+ * Class {@link MediaDaoImpl}
  *
  * @author Elena Shvets
  * @version 1.0
- * @since 16.10.15
+ * @since 05.02.16
  */
 @Repository
 @Transactional
 public class MediaDaoImpl implements MediaDao {
 
-    private static final Logger LOG = Logger.getLogger(MediaDaoImpl.class);
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Media save(Media media) {
+    public void save(Media media) {
         entityManager.persist(media);
-        return media;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Media update(Media media) {
+    public void update(Media media) {
         entityManager.merge(media);
-        return media;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(Media media) {
         Media removingMedia = entityManager.find(Media.class, media.getId());

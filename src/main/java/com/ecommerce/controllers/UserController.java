@@ -1,20 +1,22 @@
 package com.ecommerce.controllers;
 
-import com.ecommerce.model.User;
 import com.ecommerce.dto.UserDto;
+import com.ecommerce.model.User;
 import com.ecommerce.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * Class {@link com.ecommerce.controllers.UserController}
+ * Class {@link UserController}
+ * Handles user - related requests
  *
  * @author Elena Shvets
  * @version 1.0
@@ -29,6 +31,16 @@ public class UserController {
     private UserService userService;
 
     /**
+     * Method that shows the form for adding/login a user
+     *
+     * @return result page
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String showLoginForm() {
+        return "view.login_form";
+    }
+
+    /**
      * Method that create and add an object to the database
      * and return response with error message if something wrong. If everything ok -
      * response with success message
@@ -37,22 +49,22 @@ public class UserController {
      * @return result
      * *
      */
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<User> createUser(@RequestBody UserDto userDto) {
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String createUser(@ModelAttribute UserDto userDto, Model model) {
         if (userDto == null) {
-            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+            LOG.info("User must not be null");
         }
-        User user = new User();
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        userService.saveUser(user);
-        return new ResponseEntity<User>(HttpStatus.OK);
-    }
+        User user = userService.findUserByEmail(userDto.getEmail());
+        if (user != null) {
+            return "view.all_products";
+        }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String showLoginForm() {
-        return "view.login_form";
+        User newUser = new User();
+        newUser.setEmail(userDto.getEmail());
+        newUser.setPassword(userDto.getPassword());
+        userService.saveUser(newUser);
+        return "view.join_user";
     }
 
     /**
@@ -90,4 +102,20 @@ public class UserController {
         }
         return new ResponseEntity(userService.findUserById(userId), HttpStatus.OK);
     }
+
+    /**
+     * Method that validates data
+     * return "false" - if the data is not valid or missing
+     * If everything ok - return "true"
+     *
+     * @param userDto
+     * @return result
+     */
+    public boolean isValid(UserDto userDto) {
+        if (userDto.getEmail() == null || userDto.getPassword() == null) {
+            return false;
+        }
+        return true;
+    }
+
 }

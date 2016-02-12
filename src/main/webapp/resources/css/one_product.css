@@ -1,0 +1,62 @@
+
+#goods {
+    width: 100%;
+}
+
+#left {
+    margin: 0 auto;
+    float: left;
+    width: 77%;
+    height: 720px;
+    padding: 10px 20px;
+    border-right: 1px dotted white;
+    border-color: #005d5d;
+}
+
+#right_part {
+
+    display: inline;
+}
+
+#left_part {
+    float: left;
+    width: 25%;
+    display: inline;
+}
+
+#center {
+    margin: 0 auto;
+    width: 50%;
+}
+
+#right {
+    float: right;
+    width:23%;
+    margin: 0 20px 0 0;
+    padding: 10px 0;
+}
+
+.rbox span {
+    background-color: #9b6800;
+    display: block;
+    position: absolute;
+    top: 13px;
+    left: 8px;
+    width: 8px;
+    height: 8px;
+}
+
+.content_veiw {
+    font-size: 15px;
+    color: #9b6800;
+}
+
+#title {
+    font-size: 20px;
+    color: #9b6800;
+}
+
+.title_name {
+    font-size: 20px;
+    color: #9b6800;
+}

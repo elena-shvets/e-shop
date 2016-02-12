@@ -1,7 +1,6 @@
 package com.ecommerce.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -21,7 +20,6 @@ public class Product {
     private BigDecimal price;
     private String description;
     private ProductCategory category;
-//    private String imageUrl;
     private Media media;
 
     public Product() {
@@ -29,8 +27,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    @Column(name = "id", unique = true, nullable = false, updatable = false)
+    @Column(name = "id", unique = true)
     public Long getId() {
         return id;
     }
@@ -67,7 +64,7 @@ public class Product {
     }
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id")
     public ProductCategory getCategory() {
         return category;
     }
@@ -76,20 +73,43 @@ public class Product {
         this.category = category;
     }
 
-//    @Column(name = "image_url")
-//    public String getImageUrl() {
-//        return imageUrl;
-//    }
-//
-//    public void setImageUrl(String imageUrl) {
-//        this.imageUrl = imageUrl;
-//    }
-
     public Media getMedia() {
         return media;
     }
 
     public void setMedia(Media media) {
         this.media = media;
+    }
+
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int result = 1;
+        result = (int) (PRIME * result + getId());
+        return result;
+    }
+
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
+            return true;
+        }
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        Product p = (Product) o;
+        return (this.getId() == p.getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "title=" + title +
+                ", price=" + price +
+                ", description=" + description +
+                ", category=" + category.getTitle() +
+                '}';
     }
 }

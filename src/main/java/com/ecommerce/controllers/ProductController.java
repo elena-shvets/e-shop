@@ -2,7 +2,6 @@ package com.ecommerce.controllers;
 
 import com.ecommerce.dto.ProductDto;
 import com.ecommerce.model.Product;
-import com.ecommerce.repository.ProductCategoryDao;
 import com.ecommerce.service.ProductService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
- * Class {@link com.ecommerce.controllers.ProductController}
+ * Class {@link ProductController}
+ * Handles product - related requests
  *
  * @author Elena Shvets
  * @version 1.0
@@ -33,9 +32,11 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private ProductCategoryDao categoryRepository;
-
+    /**
+     * Method that shows the form for adding a new product
+     *
+     * @return result page
+     */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showAdminForm() {
         return "view.admin_form";
@@ -46,33 +47,26 @@ public class ProductController {
      * and return response with error message if something wrong. If everything ok -
      * response with success message
      *
-     //     * @param productDto
-     * @return result
-     * *
+     * @param productDto
+     * @param model
+     * @return results page
      */
-//    @RequestMapping(value = "/create", method = RequestMethod.POST)
-//    @ResponseBody
-//    public ResponseEntity<Product> createProduct(@RequestBody ProductDto productDto) {
-//        if (!isValid(productDto)) return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
-//        Product product = new Product();
-//        product.setTitle(productDto.getTitle());
-//        product.setPrice(productDto.getPrice());
-//        product.setDescription(productDto.getDescription());
-//               productService.save(product);
-//        return new ResponseEntity<Product>(HttpStatus.OK);
-//    }
-    @RequestMapping(value="/created", method=RequestMethod.POST)
-    public String createProduct(@ModelAttribute ProductDto productDto, Model model) throws IOException {
-//        if(productDto == null){
-//            return String.valueOf(HttpStatus.NOT_ACCEPTABLE);
-//        }
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String createProduct(@ModelAttribute ProductDto productDto, Model model) {
+
+        if (!isValid(productDto)) {
+            LOG.info("NOT_ACCEPTABLE");
+        }
         Product product = new Product();
+        model.addAttribute("title", productDto.getTitle());
+        model.addAttribute("price", productDto.getPrice());
+        model.addAttribute("description", productDto.getDescription());
         product.setTitle(productDto.getTitle());
-        product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
-        model.addAttribute("created", product);
+        product.setDescription(productDto.getDescription());
+
         productService.save(product);
-        return "created_prod";
+        return "view.created_prod";
     }
 
 
@@ -85,15 +79,14 @@ public class ProductController {
      */
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-
-    public String getAllProduct() {
+    public String getAllProduct(Model model) {
         List<Product> products = productService.getAll();
         if (CollectionUtils.isEmpty(products)) {
             return "Any product doesn't exist";
         }
+        model.addAttribute("products", products);
 
         return "view.all_products";
-
     }
 
 
@@ -107,13 +100,18 @@ public class ProductController {
      * *
      */
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
-    public String getOneById(@PathVariable Long productId, Model model) {
+    public String getOneById(@PathVariable(value = "productId") Long productId, Model model) {
         if (!productService.isProductExist(productId)) {
             return "Product doesn't exist";
         }
+        Product product = productService.findOneById(productId);
+        System.out.println(product);
+        model.addAttribute("title", product.getTitle());
+        model.addAttribute("description", product.getDescription());
+        model.addAttribute("prodId", product.getId());
+        model.addAttribute("price", product.getPrice());
         return "view.one_product";
     }
-
 
     /**
      * Method that delete an object by id from the database
@@ -126,7 +124,7 @@ public class ProductController {
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/{productId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResponseEntity delete(@PathVariable long productId) {
+    public ResponseEntity delete(@PathVariable Long productId) {
         if (!productService.isProductExist(productId)) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
@@ -142,54 +140,11 @@ public class ProductController {
      * @param productDto
      * @return result
      */
-//    public boolean isValid(ProductDto productDto) {
-//        if (productDto.getTitle() == null || productDto.getCategory() == null) return false;
-//        return true;
-//    }
     public boolean isValid(ProductDto productDto) {
-        if (productDto.getTitle() == null) return false;
+        if (productDto.getTitle() == null || productDto.getDescription() == null) {
+            return false;
+        }
         return true;
     }
 
-
-//    class ProductEditor extends PropertyEditorSupport {
-//
-//        @Override
-//        public void setAsText(String text) throws java.lang.IllegalArgumentException{
-//
-//            BigDecimal price = BigDecimal.valueOf(Long.parseLong(text));
-//            Product product = new Product();
-//            setValue(product);
-//        }
-//    }
-
-//    @InitBinder
-//    protected void initBinder(WebDataBinder binder) {
-//        binder.registerCustomEditor(Product.class, new ProductEditor());
-//
-//    }
-//    public static class NumberFormatUtil {
-//        public static void registerDoubleFormat(WebDataBinder binder) {
-//        binder.registerCustomEditor(Long.TYPE, new CustomerDoubleEditor());
-//    }
-//
-//        private static class CustomerDoubleEditor extends PropertyEditorSupport {
-//            public String getAsText() {
-//            Long l = (Long) getValue();
-//            return l.toString();
-//        }
-//
-//            public void setAsText(String str) {
-//            if (str == null || str.trim().equals(""))
-//                setValue(0L);
-//            else
-//                setValue(Long.parseLong(str));
-//        }
-//
-//        }
-//    }
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder) {
-//        NumberFormatUtil.registerDoubleFormat(binder);
-//    }
 }

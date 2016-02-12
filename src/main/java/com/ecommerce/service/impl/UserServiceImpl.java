@@ -3,15 +3,13 @@ package com.ecommerce.service.impl;
 import com.ecommerce.model.User;
 import com.ecommerce.repository.UserDao;
 import com.ecommerce.service.UserService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
- * Class {@link com.ecommerce.service.impl.UserServiceImpl}
+ * Class {@link UserServiceImpl}
  *
  * @author Elena Shvets
  * @version 1.0
@@ -20,55 +18,81 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    private static final Logger LOG = Logger.getLogger(UserServiceImpl.class);
-
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private EntityManager entityManager;
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public User saveUser(User user) {
+    public void saveUser(User user) {
         if (user == null) {
             throw new IllegalArgumentException("User must not be null");
         }
-        return userDao.saveUser(user);
+        userDao.saveUser(user);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public User updateUser(User user) {
-        return userDao.updateUser(user);
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteUser(User user) {
         userDao.deleteUser(user);
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public User findUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public User findUserById(Long id) {
         return userDao.findUserById(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
-}
+    }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean checkUserForExistById(Long id) {
-        if (!entityManager.contains(findUserById(id))) {
-            return userDao.checkUserForExistById(id);
+    public boolean isExistingEmail(String email) {
+        if (!userDao.isExistingEmail(email)){
+            return false;
         }
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean checkUserForExistById(Long id) {
+        if(!userDao.checkUserForExistById(id)){
+            return false;
+        }
+        return true;
+    }
 
 }

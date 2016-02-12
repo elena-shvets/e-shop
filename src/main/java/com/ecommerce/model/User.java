@@ -1,10 +1,9 @@
 package com.ecommerce.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
- * Class {@link com.ecommerce.model.User}
+ * Class {@link User}
  *
  * @author Elena Shvets
  * @version 1.0
@@ -19,7 +18,6 @@ public class User {
     private Long id;
     private String email;
     private String password;
-    private String login;
     private UserRole roles;
 
     public User() {
@@ -28,8 +26,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    @Column(name = "id", unique = true, nullable = false, updatable = false)
+    @Column(name = "id", unique = true)
     public Long getId() {
         return id;
     }
@@ -54,16 +51,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-
-    }
-
-    @Column(name = "login")
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
 
     }
 

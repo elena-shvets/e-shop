@@ -1,7 +1,6 @@
 package com.ecommerce.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -34,7 +33,6 @@ public class Media implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     @Column(name = "id", unique = true, nullable = false, updatable = false)
     public Long getId() {
         return id;

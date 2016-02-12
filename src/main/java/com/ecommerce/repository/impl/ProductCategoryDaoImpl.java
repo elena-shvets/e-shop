@@ -13,33 +13,38 @@ import java.util.List;
 
 
 /**
- * Class {@link com.ecommerce.repository.impl.ProductCategoryDaoImpl}
+ * Class {@link ProductCategoryDaoImpl}
  *
  * @author Elena Shvets
  * @version 1.0
- * @since 14.10.15
+ * @since 04.02.16
  */
 @Repository
 @Transactional
 public class ProductCategoryDaoImpl implements ProductCategoryDao {
 
-    private static final Logger LOG = Logger.getLogger(ProductDaoImpl.class);
-
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public ProductCategory save(ProductCategory productCategory) {
+    public void save(ProductCategory productCategory) {
         entityManager.persist(productCategory);
-        return productCategory;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public ProductCategory update(ProductCategory productCategory) {
+    public void update(ProductCategory productCategory) {
         entityManager.merge(productCategory);
-        return productCategory;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(ProductCategory productCategory) {
         ProductCategory removingProductCategory = entityManager.find(ProductCategory.class, productCategory.getId());
@@ -47,16 +52,25 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ProductCategory foundOneById(Long id) {
         return entityManager.find(ProductCategory.class, id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ProductCategory foundByTitle(String title) {
         return entityManager.find(ProductCategory.class, title);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ProductCategory> getAll() {
         Query query = entityManager.createQuery("from ProductCategory");

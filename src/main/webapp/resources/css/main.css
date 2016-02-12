@@ -1,0 +1,144 @@
+.content {
+    background-color: floralwhite;
+    height: 725px;
+    width: 100%;
+    padding: 1px;
+}
+
+#greet h2{
+    margin: 0 auto;
+    padding-top: 200px;
+    width: 50%;
+
+    top: 50%;
+    font-size: 15px;
+    line-height: 1.33;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: #9b6800;
+}
+
+
+.msg{
+    margin: 0 auto;
+    padding-left: 32%;
+    width: 50%;
+    font-size: 15px;
+    color: #9b6800;
+    border-color: #9b6800;
+}
+
+.btn {
+
+    background: #ffcb64;
+    width: 85px;
+    height: 25px;
+    margin: 15px 0 5px 0;
+    padding: 5px 5px 2px 5px;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #9b6800;
+    line-height: 1.2;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    left: 1100px;
+}
+.rbox {
+    float: left;
+    position: absolute;
+    top: 200px;
+    width: 100px;
+    height: 15px;
+    margin: 15px 0 5px 0;
+    padding: 5px 5px 2px 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #9b6800;;
+    line-height: 1.2;
+    padding-right: 15px;
+    padding-left: 20px;
+    padding-top: 10px;
+    left: 1100px;
+}
+.cartItem{
+    float: left;
+    position: absolute;
+    top:150px;
+    width: 100px;
+    height: 60%;
+    margin: 100px 0 5px 0;
+    padding: 10px 5px 2px 5px;
+    font-size: 12px;
+    text-align: center;
+    color: #9b6800;;
+    line-height: 1.2;
+    padding-right: 5px;
+    padding-top: 10px;
+    left: 1080px;
+}
+
+.form {
+    margin: 0 auto;
+    width: 50%;
+    font-size: 15px;
+    color: #9b6800;
+    border-color: #9b6800;
+}
+
+.style {
+    font-size: 15px;
+    color: #9b6800;
+}
+
+
+.adm{
+    margin: 0 auto;
+    float: left;
+    width: 40%;
+    height: 200px;
+    padding: 20px 20px;
+    border-color: #005d5d;
+}
+.form_view{
+    padding-top: 100px;
+    border: 1px;
+    border-color: #9b6800;
+}
+
+
+#log {
+
+    margin: 0 auto;
+
+    float: left;
+    width: 40%;
+    height: 200px;
+    padding: 20px 20px;
+    border-color: #005d5d;
+}
+.style {
+    font-size: 15px;
+    color: #9b6800;
+}
+.form_view{
+    padding-top: 100px;
+    border: 1px;
+    border-color: #9b6800;
+}
+
+
+.form {
+    margin: 0 auto;
+    width: 50%;
+    font-size: 15px;
+    color: #9b6800;
+    border-color: #9b6800;
+}
+td{
+    font-size: 11px;
+    color: #9b6800;
+}

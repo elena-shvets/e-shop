@@ -1,7 +1,6 @@
 package com.ecommerce.model;
 
 
-
 /**
  * Class {@link UserRole}
  *
@@ -10,20 +9,9 @@ package com.ecommerce.model;
  * @since 05.02.16
  */
 
-public enum UserRole  {
-//    USER("ROLE_USER"),
-//    ADMIN("ROLE_ADMIN");
+public enum UserRole {
 
     USER, ADMIN
 
-//     private String authority;
-//     UserRole(String authority) {
-//        this.authority = authority;
-//     }
-
-//     @Override
-//     public String getAuthority() {
-//       return authority;
-//     }
 
 }

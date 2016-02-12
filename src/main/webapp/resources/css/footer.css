@@ -1,0 +1,32 @@
+#footer {
+    color: #9b6800;
+    background: #ffcb64;
+    border-color: #c68400;
+}
+
+#footer {
+    margin: 10px 0 10px 0;
+    padding: 5px 0;
+    text-align: center;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+div {
+    display: block;
+}
+
+#footer a {
+    color: #c68400;
+    background: transparent;
+}
+
+#footer a {
+    padding: 3px 5px;
+}
+
+a:-webkit-any-link {
+    color: -webkit-link;
+    text-decoration: underline;
+    cursor: auto;
+}

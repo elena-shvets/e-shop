@@ -11,11 +11,11 @@ import java.util.List;
 
 
 /**
- * Class {@link com.ecommerce.service.impl.ProductCategoryServiceImpl}
+ * Class {@link ProductCategoryServiceImpl}
  *
  * @author Elena Shvets
  * @version 1.0
- * @since 14.10.15
+ * @since 06.12.16
  */
 @Service("productCategory")
 public class ProductCategoryServiceImpl implements ProductCategoryService {
@@ -25,34 +25,52 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Autowired
     private ProductCategoryDao productCategoryDao;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public ProductCategory save(ProductCategory productCategory) {
+    public void save(ProductCategory productCategory) {
         if (productCategory == null) {
             throw new IllegalArgumentException("ProductCategory must not be null");
         }
-        return productCategoryDao.save(productCategory);
+        productCategoryDao.save(productCategory);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public ProductCategory update(ProductCategory productCategory) {
-        return productCategoryDao.update(productCategory);
+    public void update(ProductCategory productCategory) {
+        productCategoryDao.update(productCategory);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(ProductCategory productCategory) {
         productCategoryDao.delete(productCategory);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ProductCategory foundOneById(Long id) {
         return productCategoryDao.foundOneById(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ProductCategory foundByTitle(String title) {
         return productCategoryDao.foundByTitle(title);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ProductCategory> getAll() {
         return productCategoryDao.getAll();

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
- * Class {@link com.ecommerce.model.User}
+ * Class {@link ProductCategory}
  *
  * @author Elena Shvets
  * @version 1.0
@@ -24,7 +24,7 @@ public class ProductCategory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "category_id", unique = true, nullable = false, updatable = false)
+    @Column(name = "category_id", unique = true, updatable = false)
     public Long getId() {
         return id;
     }

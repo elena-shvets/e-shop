@@ -29,6 +29,7 @@
 
     <definition name="view.one_product" extends="layout.basic">
         <put-attribute name="body" value="/WEB-INF/views/one_product.jsp"/>
+        <put-attribute name="script" value="/resources/js/shopping_cart.js"/>
     </definition>
     <definition name="view.login_form" extends="layout.basic">
         <put-attribute name="body" value="/WEB-INF/views/login.jsp"/>
@@ -38,6 +39,12 @@
     </definition>
     <definition name="view.created_prod" extends="layout.basic">
         <put-attribute name="body" value="/WEB-INF/views/created_prod.jsp"/>
+    </definition>
+    <definition name="view.join_user" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/join_user.jsp"/>
+    </definition>
+    <definition name="view.cart" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/cart.jsp"/>
     </definition>
 
 </tiles-definitions>

@@ -6,7 +6,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 
 /**
- * Created by elena on 05.02.16.
+ * Class {@link com.ecommerce.dto.ProductCategoryDto}
+ *
+ * @author Elena Shvets
+ * @version 1.0
+ * @since 05.02.16
  */
 @JsonAutoDetect
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
