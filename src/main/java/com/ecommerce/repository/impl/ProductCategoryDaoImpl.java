@@ -4,6 +4,7 @@ import com.ecommerce.model.ProductCategory;
 import com.ecommerce.repository.ProductCategoryDao;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -65,7 +66,14 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao {
      */
     @Override
     public ProductCategory foundByTitle(String title) {
-        return entityManager.find(ProductCategory.class, title);
+        Query query = entityManager.createQuery("SELECT pc FROM ProductCategory pc WHERE pc.title = :title");
+        query.setParameter("title", title);
+        List<ProductCategory> categories = query.getResultList();
+        if (!CollectionUtils.isEmpty(categories)) {
+            return categories.get(0);
+        }
+
+        return null;
     }
 
     /**

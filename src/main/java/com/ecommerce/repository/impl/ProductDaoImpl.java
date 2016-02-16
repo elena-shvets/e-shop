@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -69,7 +70,13 @@ public class ProductDaoImpl implements ProductDao {
      */
     @Override
     public Product findOneByTitle(String title) {
-        return entityManager.find(Product.class, title);
+        Query query = entityManager.createQuery("SELECT p FROM Product p WHERE p.title= :title");
+        query.setParameter("title", title);
+        List<Product> products = query.getResultList();
+        if (!CollectionUtils.isEmpty(products)) {
+            return products.get(0);
+        }
+        return null;
     }
 
     /**
