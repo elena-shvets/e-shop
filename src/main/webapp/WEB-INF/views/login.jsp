@@ -24,7 +24,10 @@
                     <tr>
                         <div class="form">
                             <td class="style">Password:</td>
-                            <td><input id="pass" name="password" type="password" path="password"></td>
+                            <td><input id="pass" name="password" type="password" path="password">
+                                <div>Password must have at least 1<br>
+                                    number and be between 6 and 30 characters long</div>
+                            </td>
                         </div>
                     </tr>
                     <tr>
@@ -33,6 +36,7 @@
                         </div>
                     </tr>
                 </div>
+
             </table>
         </form>
     </div>

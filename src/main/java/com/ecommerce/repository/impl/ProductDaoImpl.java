@@ -2,9 +2,9 @@ package com.ecommerce.repository.impl;
 
 import com.ecommerce.model.Product;
 import com.ecommerce.repository.ProductDao;
-import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -54,7 +55,16 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> getAll() {
         Query query = entityManager.createQuery("from Product");
-        return query.getResultList();
+        int pageNumber = 1;
+        int pageSize = 5;
+
+        query.setFirstResult((pageNumber - 1) * pageSize);
+        query.setMaxResults(pageSize);
+        List <Product> products = query.getResultList();
+        int totalResults = products.size();
+        int totalPages = (int) Math.ceil(totalResults / pageSize);
+
+        return products;
     }
 
     /**
@@ -103,5 +113,21 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public boolean isProductExist(Long id) {
         return entityManager.contains(findOneById(id));
+    }
+
+    @Override
+    public List<Product> getProductSortedByPrice() {
+        Query query = entityManager.createQuery("SELECT p FROM Product p ORDER BY price, id");
+        List<Product> products = query.getResultList();
+
+        return products;
+    }
+
+    @Override
+    public List<Product> getProductSortedByTitle() {
+        Query query = entityManager.createQuery("SELECT p FROM Product p ORDER BY title, id");
+        List<Product> products = query.getResultList();
+
+        return products;
     }
 }

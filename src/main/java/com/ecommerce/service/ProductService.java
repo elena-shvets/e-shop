@@ -71,4 +71,8 @@ public interface ProductService {
      * @return
      */
     boolean isProductExist(Long id);
+
+    List<Product> getProductSortedByPrice();
+
+    List<Product> getProductSortedByTitle();
 }

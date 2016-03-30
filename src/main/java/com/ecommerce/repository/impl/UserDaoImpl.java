@@ -60,10 +60,6 @@ public class UserDaoImpl implements UserDao {
     public User findUserByEmail(String email) {
         Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email");
         query.setParameter("email", email);
-        List<User> users = query.getResultList();
-        if (!CollectionUtils.isEmpty(users)) {
-            return users.get(0);
-        }
 
         return null;
 

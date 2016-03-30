@@ -46,5 +46,11 @@
     <definition name="view.cart" extends="layout.basic">
         <put-attribute name="body" value="/WEB-INF/views/cart.jsp"/>
     </definition>
+    <definition name="view.sorted" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/sorted_products.jsp"/>
+    </definition>
+    <definition name="view.find" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/find_form.jsp"/>
+    </definition>
 
 </tiles-definitions>

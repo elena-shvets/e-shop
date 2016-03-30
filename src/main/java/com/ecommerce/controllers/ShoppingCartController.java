@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Iterator;
 import java.util.List;
@@ -47,12 +46,11 @@ public class ShoppingCartController {
      * @param productId
      * @param model
      * @param request
-     * @param response
      * @return shoppingCart's info
      */
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public ResponseEntity<ShoppingCart> addToCart(@PathVariable Long productId, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<ShoppingCart> addToCart(@PathVariable Long productId, Model model, HttpServletRequest request) {
 
         Product prodToCart = productService.findOneById(productId);
         ShoppingCartItem cartItem = new ShoppingCartItem();
@@ -66,7 +64,7 @@ public class ShoppingCartController {
         if (cart != null) {
             cart.addItem(cartItem);
             session.setAttribute("cart", cart);
-            cart = (ShoppingCart) session.getAttribute("cart");
+//            cart = (ShoppingCart) session.getAttribute("cart");
         } else {
             cart = new ShoppingCart();
             cart.addItem(cartItem);

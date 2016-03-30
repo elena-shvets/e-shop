@@ -98,4 +98,20 @@ public class ProductServiceImpl implements ProductService {
         }
         return true;
     }
+
+
+    @Override
+    public List<Product> getProductSortedByPrice(){
+        List<Product> products =  productDao.getProductSortedByPrice();
+
+        return products;
+    }
+
+    @Override
+    public List<Product> getProductSortedByTitle() {
+        List<Product> products = productDao.getProductSortedByTitle();
+        return products;
+
+    }
 }
+

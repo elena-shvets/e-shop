@@ -67,8 +67,8 @@ public class ShoppingCart implements Serializable {
     }
 
     public void recalcCostAndAmount() {
-        totalCost = BigDecimal.valueOf(0);
-        totalAmount = 0;
+//        totalCost = BigDecimal.valueOf(0);
+//        totalAmount = 0;
 
         for (ShoppingCartItem item : items) {
             totalCost = totalCost.add(item.calculateTotalCost());

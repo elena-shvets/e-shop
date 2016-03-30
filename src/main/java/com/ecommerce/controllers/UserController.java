@@ -13,6 +13,8 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Class {@link UserController}
@@ -26,6 +28,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private static final Logger LOG = Logger.getLogger(UserController.class);
+    private static final String PASSWORD_PATTERN = "(^(?=.*\\d)(?=.*[a-zA-Z]).{6,15}$)";
 
     @Autowired
     private UserService userService;
@@ -55,9 +58,15 @@ public class UserController {
         if (userDto == null) {
             LOG.info("User must not be null");
         }
+        Pattern p = Pattern.compile(PASSWORD_PATTERN);
+        Matcher m = p.matcher(userDto.getPassword());
+        if (!m.matches()){
+            return "view.login_form";
+        }
         User user = userService.findUserByEmail(userDto.getEmail());
         if (user != null) {
-            return "view.all_products";
+            return "redirect:/products/getAll";
+//            return "view.all_products";
         }
 
         User newUser = new User();

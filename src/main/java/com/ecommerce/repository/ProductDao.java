@@ -71,4 +71,8 @@ public interface ProductDao {
      * @return result(true or false)
      */
     boolean isProductExist(Long id);
+
+    List<Product> getProductSortedByPrice();
+
+    List<Product> getProductSortedByTitle();
 }

@@ -5,6 +5,8 @@ import com.ecommerce.model.Product;
 import com.ecommerce.service.ProductService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,6 +34,8 @@ import java.util.List;
 public class ProductController {
 
     private static final Logger LOG = Logger.getLogger(ProductController.class);
+
+    static final int DEFAULT_PAGE_SIZE = 6;
 
     @Autowired
     private ProductService productService;
@@ -78,17 +86,62 @@ public class ProductController {
      * @return formed result
      */
 
+//    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+//    public String getAllProduct(Model model) {
+//        List<Product> products = productService.getAll();
+//        if (CollectionUtils.isEmpty(products)) {
+//            return "Any product doesn't exist";
+//        }
+//        model.addAttribute("products", products);
+//
+//        return "view.all_products";
+//    }
+
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    public String getAllProduct(Model model) {
-        List<Product> products = productService.getAll();
-        if (CollectionUtils.isEmpty(products)) {
-            return "Any product doesn't exist";
+    public String getSortedProduct(HttpServletRequest request, Model model,  @PageableDefault Pageable pageable) {
+        String param = request.getParameter("sort");
+
+        ArrayList<String> sorts = new ArrayList<String>(Arrays.asList( "title", "price_asc", "price_desc"));
+        if(!sorts.contains(param)){
+            param = "title";
         }
-        model.addAttribute("products", products);
+        List<Product> products;
+
+        if(param.equals("title")) {
+            products  = productService.getProductSortedByTitle();
+//            Page<Product> page = (Page<Product>)  sort_products;
+            if (CollectionUtils.isEmpty(products)) {
+                return "Any product doesn't exist";
+            }
+            model.addAttribute("products",  products);
+        }
+
+        if(param.equals("price_asc")) {
+            products  = productService.getProductSortedByPrice();
+//            Page<Product> page = (Page<Product>)  sort_products;
+            if (CollectionUtils.isEmpty(products)) {
+                return "Any product doesn't exist";
+            }
+            model.addAttribute("products",  products);
+
+        }
+        if(param.equals("price_desc")){
+            products  = productService.getProductSortedByPrice();
+            if (CollectionUtils.isEmpty(products)) {
+                return "Any product doesn't exist";
+            }
+            Collections.reverse(products);
+
+            model.addAttribute("products",  products);
+        }
 
         return "view.all_products";
     }
 
+    @RequestMapping( method = RequestMethod.GET)
+    public String showFindForm(){
+        return "view.find";
+    }
 
     /**
      * Method that receives an object by id from the database
@@ -104,15 +157,33 @@ public class ProductController {
         if (!productService.isProductExist(productId)) {
             return "Product doesn't exist";
         }
+        findOne(productId,model);
+        return "view.one_product";
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String getOne(HttpServletRequest request, Model model) {
+
+        String param = request.getParameter("search");
+        Long productId = Long.parseLong(param);
+        if (!productService.isProductExist(productId)) {
+            return "Product doesn't exist";
+        }
+
+        findOne(productId,model);
+        return "view.one_product";
+    }
+
+
+    private Product findOne(Long productId, Model model){
         Product product = productService.findOneById(productId);
-        System.out.println(product);
         model.addAttribute("title", product.getTitle());
         model.addAttribute("description", product.getDescription());
         model.addAttribute("prodId", product.getId());
         model.addAttribute("price", product.getPrice());
-        return "view.one_product";
+        return product;
     }
-
     /**
      * Method that delete an object by id from the database
      * and return response with error message if product doesn't exist . If everything ok -
@@ -122,13 +193,14 @@ public class ProductController {
      * @return result, HttpStatus
      */
     @SuppressWarnings("unchecked")
-    @RequestMapping(value = "/{productId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{productId}", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity delete(@PathVariable Long productId) {
         if (!productService.isProductExist(productId)) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         productService.deleteById(productId);
+
         return new ResponseEntity(HttpStatus.OK);
     }
 

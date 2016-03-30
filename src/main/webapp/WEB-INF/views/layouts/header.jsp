@@ -27,10 +27,15 @@
         <h2>You can find here everything you want</h2>
 
     </div>
-    <ul id="menu">
+    <ul id="menu" class="dropdown">
         <li><a href="/hello/greeting"><span></span>Home</a></li>
         <li><a href="/products/getAll"><span></span>All products</a></li>
-        <li><a href="/products/create"><span></span>Admin</a></li>
+        <li><a href="/products/create" class="dropdown-top"><span></span>Admin</a>
+            <ul class="dropdown-inside">
+                <li><a href="/products/create">add new product</a></li>
+                <li><a href="#">show all products</a></li>
+            </ul>
+        </li>
         <li><a href="/cart/checkout"><span></span>Shopping cart</a></li>
         <li><a href="/user/login"><span></span>Sign in</a></li>
     </ul>
